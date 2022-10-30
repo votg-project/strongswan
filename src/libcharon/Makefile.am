@@ -363,6 +363,13 @@ if MONOLITHIC
 endif
 endif
 
+if USE_EAP_SIMAKA_LEEMOBI
+  SUBDIRS += plugins/eap_simaka_leemobi
+if MONOLITHIC
+  libcharon_la_LIBADD += plugins/eap_simaka_leemobi/libstrongswan-eap-simaka-leemobi.la
+endif
+endif
+
 if USE_EAP_SIMAKA_PSEUDONYM
   SUBDIRS += plugins/eap_simaka_pseudonym
 if MONOLITHIC

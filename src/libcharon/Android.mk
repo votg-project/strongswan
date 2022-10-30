@@ -187,6 +187,8 @@ LOCAL_SRC_FILES += $(call add_plugin, eap-simaka-pseudonym)
 
 LOCAL_SRC_FILES += $(call add_plugin, eap-simaka-reauth)
 
+LOCAL_SRC_FILES += $(call add_plugin, eap-simaka-leemobi)
+
 LOCAL_SRC_FILES += $(call add_plugin, eap-sim-file)
 
 # adding libakasim if either eap-aka or eap-sim is enabled
