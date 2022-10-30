@@ -381,6 +381,9 @@ static void log_auth(auth_cfg_t *auth)
 			case AUTH_RULE_IDENTITY:
 				DBG2(DBG_CFG, "   id = %Y", v.id);
 				break;
+			case AUTH_RULE_IDENTITY_SEND:
+				DBG2(DBG_CFG, "   id_send = %Y", v.id);
+				break;
 			case AUTH_RULE_CA_IDENTITY:
 				DBG2(DBG_CFG, "   ca_id = %Y", v.id);
 				break;
@@ -1423,6 +1426,15 @@ CALLBACK(parse_ike_id, bool,
 }
 
 /**
+ * Parse IKE identity
+ */
+CALLBACK(parse_ike_id_send, bool,
+	auth_cfg_t *cfg, chunk_t v)
+{
+	return parse_id(cfg, AUTH_RULE_IDENTITY_SEND, v);
+}
+
+/**
  * Parse CA identity constraint
  */
 CALLBACK(parse_ca_id, bool,
@@ -1833,6 +1845,7 @@ CALLBACK(auth_kv, bool,
 	parse_rule_t rules[] = {
 		{ "auth",			parse_auth,			auth->cfg					},
 		{ "id",				parse_ike_id,		auth->cfg					},
+		{ "id_send",			parse_ike_id_send,	auth->cfg					},
 		{ "ca_id",			parse_ca_id,		auth->cfg					},
 		{ "aaa_id",			parse_aaa_id,		auth->cfg					},
 		{ "eap_id",			parse_eap_id,		auth->cfg					},

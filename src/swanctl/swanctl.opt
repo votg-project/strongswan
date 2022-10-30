@@ -503,6 +503,12 @@ connections.<conn>.remote<suffix>.id = %any
 	with wildcards, the _charon.rdn_matching_ option in **strongswan.conf**(5)
 	specifies how RDNs are matched.
 
+connections.<conn>.remote<suffix>.id_send = %any
+	IKE identity to send in IDr payload during EAP authentication.
+
+	IKE identity to send in IDr payload during EAP authentication instead of
+	that one provided in _id_ option.
+
 connections.<conn>.remote<suffix>.eap_id = id
 	Identity to use as peer identity during EAP authentication.
 

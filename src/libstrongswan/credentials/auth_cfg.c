@@ -35,6 +35,7 @@ ENUM(auth_class_names, AUTH_CLASS_ANY, AUTH_CLASS_XAUTH,
 
 ENUM(auth_rule_names, AUTH_RULE_IDENTITY, AUTH_HELPER_AC_CERT,
 	"RULE_IDENTITY",
+	"RULE_IDENTITY_SEND",
 	"RULE_IDENTITY_LOOSE",
 	"RULE_AUTH_CLASS",
 	"RULE_AAA_IDENTITY",
@@ -76,6 +77,7 @@ static inline bool is_multi_value_rule(auth_rule_t type)
 		case AUTH_RULE_EAP_TYPE:
 		case AUTH_RULE_EAP_VENDOR:
 		case AUTH_RULE_IDENTITY:
+		case AUTH_RULE_IDENTITY_SEND:
 		case AUTH_RULE_IDENTITY_LOOSE:
 		case AUTH_RULE_EAP_IDENTITY:
 		case AUTH_RULE_AAA_IDENTITY:
@@ -224,6 +226,7 @@ static void init_entry(entry_t *this, auth_rule_t type, va_list args)
 			this->value = (void*)(uintptr_t)va_arg(args, u_int);
 			break;
 		case AUTH_RULE_IDENTITY:
+		case AUTH_RULE_IDENTITY_SEND:
 		case AUTH_RULE_EAP_IDENTITY:
 		case AUTH_RULE_AAA_IDENTITY:
 		case AUTH_RULE_XAUTH_BACKEND:
@@ -291,6 +294,7 @@ static bool entry_equals(entry_t *e1, entry_t *e2)
 			return c1->equals(c1, c2);
 		}
 		case AUTH_RULE_IDENTITY:
+		case AUTH_RULE_IDENTITY_SEND:
 		case AUTH_RULE_CA_IDENTITY:
 		case AUTH_RULE_EAP_IDENTITY:
 		case AUTH_RULE_AAA_IDENTITY:
@@ -330,6 +334,7 @@ static void destroy_entry_value(entry_t *entry)
 	switch (entry->type)
 	{
 		case AUTH_RULE_IDENTITY:
+		case AUTH_RULE_IDENTITY_SEND:
 		case AUTH_RULE_CA_IDENTITY:
 		case AUTH_RULE_EAP_IDENTITY:
 		case AUTH_RULE_AAA_IDENTITY:
@@ -412,6 +417,7 @@ static void replace(private_auth_cfg_t *this, entry_enumerator_t *enumerator,
 				entry->value = (void*)(uintptr_t)va_arg(args, u_int);
 				break;
 			case AUTH_RULE_IDENTITY:
+			case AUTH_RULE_IDENTITY_SEND:
 			case AUTH_RULE_CA_IDENTITY:
 			case AUTH_RULE_EAP_IDENTITY:
 			case AUTH_RULE_AAA_IDENTITY:
@@ -493,6 +499,7 @@ METHOD(auth_cfg_t, get, void*,
 		case AUTH_RULE_CERT_VALIDATION_SUSPENDED:
 			return (void*)FALSE;
 		case AUTH_RULE_IDENTITY:
+		case AUTH_RULE_IDENTITY_SEND:
 		case AUTH_RULE_CA_IDENTITY:
 		case AUTH_RULE_EAP_IDENTITY:
 		case AUTH_RULE_AAA_IDENTITY:
@@ -1070,6 +1077,7 @@ METHOD(auth_cfg_t, complies, bool,
 				}
 				break;
 			}
+			case AUTH_RULE_IDENTITY_SEND:
 			case AUTH_RULE_IDENTITY_LOOSE:
 				/* just an indication when verifying AUTH_RULE_IDENTITY */
 			case AUTH_RULE_XAUTH_BACKEND:
@@ -1231,6 +1239,7 @@ static void merge(private_auth_cfg_t *this, private_auth_cfg_t *other, bool copy
 					break;
 				}
 				case AUTH_RULE_IDENTITY:
+				case AUTH_RULE_IDENTITY_SEND:
 				case AUTH_RULE_CA_IDENTITY:
 				case AUTH_RULE_EAP_IDENTITY:
 				case AUTH_RULE_AAA_IDENTITY:
@@ -1364,6 +1373,7 @@ METHOD(auth_cfg_t, clone_, auth_cfg_t*,
 		switch (type)
 		{
 			case AUTH_RULE_IDENTITY:
+			case AUTH_RULE_IDENTITY_SEND:
 			case AUTH_RULE_CA_IDENTITY:
 			case AUTH_RULE_EAP_IDENTITY:
 			case AUTH_RULE_AAA_IDENTITY:
