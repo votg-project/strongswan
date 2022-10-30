@@ -648,7 +648,10 @@ METHOD(task_t, build_i, status_t,
 		cfg = get_auth_cfg(this, FALSE);
 		if (cfg)
 		{
-			idr = cfg->get(cfg, AUTH_RULE_IDENTITY);
+			idr = cfg->get(cfg, AUTH_RULE_IDENTITY_SEND);
+			if (!idr) {
+				idr = cfg->get(cfg, AUTH_RULE_IDENTITY);
+			}
 			if (!cfg->get(cfg, AUTH_RULE_IDENTITY_LOOSE) && idr &&
 				!idr->contains_wildcards(idr))
 			{

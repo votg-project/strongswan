@@ -68,6 +68,8 @@ extern enum_name_t *auth_class_names;
 enum auth_rule_t {
 	/** identity to use for IKEv2 authentication exchange, identification_t* */
 	AUTH_RULE_IDENTITY,
+	/** identity to send for IKEv2 authentication exchange, identification_t* */
+	AUTH_RULE_IDENTITY_SEND,
 	/** if TRUE don't send IDr as initiator, but verify the identity after
 	 * receiving IDr (but also verify it against subjectAltNames), bool */
 	AUTH_RULE_IDENTITY_LOOSE,

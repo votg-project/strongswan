@@ -801,6 +801,9 @@ static void build_auth_cfgs(peer_cfg_t *peer_cfg, bool local, vici_builder_t *b)
 				case AUTH_RULE_IDENTITY:
 					b->add_kv(b, "id", "%Y", v.id);
 					break;
+				case AUTH_RULE_IDENTITY_SEND:
+					b->add_kv(b, "id_send", "%Y", v.id);
+					break;
 				case AUTH_RULE_CA_IDENTITY:
 					b->add_kv(b, "ca_id", "%Y", v.id);
 					break;
