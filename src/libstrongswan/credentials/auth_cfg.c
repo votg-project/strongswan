@@ -952,6 +952,7 @@ METHOD(auth_cfg_t, complies, bool,
 
 				id1 = (identification_t*)value;
 				id2 = get(this, t1);
+				/* FIXME(leenr) */ break;
 				if (!id2 || !id2->matches(id2, id1))
 				{
 					if (t1 == AUTH_RULE_IDENTITY &&
